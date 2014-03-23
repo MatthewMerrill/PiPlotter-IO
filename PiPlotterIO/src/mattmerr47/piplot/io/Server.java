@@ -1,12 +1,17 @@
-import java.io.File;
-import java.io.FileOutputStream;
+package mattmerr47.piplot.io;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import mattmerr47.piplot.io.drawdata.DrawData;
+import mattmerr47.piplot.io.packet.Packet;
+import mattmerr47.piplot.io.packet.PacketHandler;
+import mattmerr47.piplot.io.plotter.IPenPlotter;
 
 public class Server {
 	
@@ -20,9 +25,17 @@ public class Server {
 	private OutputStream os;
 	private InputStream in;
 	
+	private ServerListener listener;
+	private PacketHandler packetHandler;
+	
+	public Server(ServerListener listener, IPenPlotter plotter) {
+		this.listener = listener;
+		this.packetHandler = new PacketHandler(this, plotter);
+	}
+	
 	public void listenForClients() {
 
-		File file = new File("PiPlotter/recieved.svg");
+		//File file = new File("PiPlotter/recieved.svg");
 		if (listening)
 			return;
 		
@@ -40,18 +53,25 @@ public class Server {
 		        System.out.println("found client.");
 		        
 		        out = new PrintWriter(clientSocket.getOutputStream(), true);
-	            os = new FileOutputStream(file);
 		        in = (clientSocket.getInputStream());
 		        
-	            byte[] buffer = new byte[1024];
-	            int bytesRead;
-	            //read from is to buffer
-	            while((bytesRead = in.read(buffer)) !=-1){
-	                os.write(buffer, 0, bytesRead);
-	            }
+				ObjectInputStream ois = new ObjectInputStream(in);
+				Object data = ois.readObject();
+				ois.close();
+				
+				if (data instanceof DrawData) {
+		            listener.onCompletion((DrawData) data);
+				} else if (data instanceof Packet) {
+					packetHandler.handle((Packet) data);
+				}
 	            out.println("you a'ight bruthah. you a'ight.");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+	            
+	            out.flush();
+	            out.close();
+	            in.close();
+	            clientSocket.close();
+	            
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -102,6 +122,10 @@ public class Server {
 		}
         
         return true;
+	}
+	
+	public void setServerListener(ServerListener serverListener) {
+		
 	}
 	
 }
