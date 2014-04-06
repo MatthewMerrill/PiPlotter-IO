@@ -50,27 +50,27 @@ public class Server {
 			try {
 				
 				clientSocket = serverSocket.accept();
-		        System.out.println("found client.");
-		        
-		        out = new PrintWriter(clientSocket.getOutputStream(), true);
-		        in = (clientSocket.getInputStream());
-		        
+				System.out.println("found client.");
+				
+				out = new PrintWriter(clientSocket.getOutputStream(), true);
+				in = (clientSocket.getInputStream());
+				
 				ObjectInputStream ois = new ObjectInputStream(in);
 				Object data = ois.readObject();
 				ois.close();
 				
 				if (data instanceof DrawData) {
-		            listener.onCompletion((DrawData) data);
+					listener.onCompletion((DrawData) data);
 				} else if (data instanceof Packet) {
 					packetHandler.handle((Packet) data);
 				}
-	            out.println("you a'ight bruthah. you a'ight.");
-	            
-	            out.flush();
-	            out.close();
-	            in.close();
-	            clientSocket.close();
-	            
+				out.println("you a'ight bruthah. you a'ight.");
+				
+				out.flush();
+				out.close();
+				in.close();
+				clientSocket.close();
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -94,8 +94,8 @@ public class Server {
 		
 		try {
 			serverSocket = new ServerSocket(PORT);
-	        System.out.println("Listening at ip: " + serverSocket.getInetAddress());
-	        System.out.println("Local Socket Address: " + serverSocket.getLocalSocketAddress());
+			System.out.println("Listening at ip: " + serverSocket.getInetAddress());
+			System.out.println("Local Socket Address: " + serverSocket.getLocalSocketAddress());
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
@@ -109,19 +109,19 @@ public class Server {
 		if (serverSocket == null)
 			return true;
 		
-        try {
-        	
-    		in.close();
-    		os.flush();
-            os.close();
-    		
+		try {
+			
+			in.close();
+			os.flush();
+			os.close();
+			
 			serverSocket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
 		}
-        
-        return true;
+		
+		return true;
 	}
 	
 	public void setServerListener(ServerListener serverListener) {

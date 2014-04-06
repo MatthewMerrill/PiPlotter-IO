@@ -7,6 +7,8 @@ public interface IPenPlotter {
 	public void gotoPosition(Point pos);
 	public Point getPosition();
 	
+	public IStepperMotor[] getSteppers();
+	
 	public void setMarking(boolean penDown);
 	public boolean getMarking();
 	
@@ -27,5 +29,8 @@ public interface IPenPlotter {
 	 * Height of the paper.
 	 */
 	public double paperHeight();
+
+	public double getXPad();
+	public double getYPad();
 
 }

@@ -5,7 +5,11 @@ public abstract class PathComponent {
 	public abstract Point getStartPoint();
 	public abstract Point getEndPoint();
 	
-	public abstract void draw();
+	public abstract Point getPointAtPercent(double percent);
+	
+	
+	//TODO: length approximation
+	//public abstract ;
 	
 	//public abstract double getLength();
 	

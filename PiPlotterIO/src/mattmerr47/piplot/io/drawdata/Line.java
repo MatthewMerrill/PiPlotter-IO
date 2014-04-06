@@ -5,26 +5,27 @@ import mattmerr47.piplot.io.path.Point;
 
 public class Line extends PathComponent {
 	
-	public Line() {
-		
+	private final Point start;
+	private final Point end;
+	
+	public Line(Point start, Point end) {
+		this.start = start;
+		this.end = end;
 	}
 
 	@Override
 	public Point getStartPoint() {
-		// TODO Auto-generated method stub
-		return null;
+		return start;
 	}
 
 	@Override
 	public Point getEndPoint() {
-		// TODO Auto-generated method stub
-		return null;
+		return end;
 	}
 
 	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-		
+	public Point getPointAtPercent(double percent) {
+		return Point.getPointAlongLine(getStartPoint(), getEndPoint(), percent);
 	}
 
 }
