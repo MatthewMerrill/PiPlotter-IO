@@ -1,5 +1,6 @@
 package mattmerr47.piplot.io;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -35,7 +36,6 @@ public class Server {
 	
 	public void listenForClients() {
 
-		//File file = new File("PiPlotter/recieved.svg");
 		if (listening)
 			return;
 		

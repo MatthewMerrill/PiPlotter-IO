@@ -9,8 +9,9 @@ public interface IPenPlotter {
 	
 	public IStepperMotor[] getSteppers();
 	
-	public void setMarking(boolean penDown);
-	public boolean getMarking();
+	// TODO: Not Functional yet - Sorry!
+	//public void setMarking(boolean penDown);
+	//public boolean getMarking();
 	
 	/**
 	 * Distance between the wheel centers in inches.

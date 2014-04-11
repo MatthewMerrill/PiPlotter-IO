@@ -1,8 +1,14 @@
 package mattmerr47.piplot.io.path;
 
+import java.io.Serializable;
 
-public class Point {
+
+public class Point implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 72077921428198590L;
 	public final double X;
 	public final double Y;
 
@@ -16,7 +22,11 @@ public class Point {
 		
 		if (obj instanceof Point) {
 			Point p = (Point)obj;
-			return (X == p.X) && (Y == p.Y);
+			
+			boolean x = (Math.abs(X - p.X) < 0.0001);
+			boolean y = (Math.abs(Y - p.Y) < 0.0001);
+			
+			return (x && y);
 		}
 		
 		return false;

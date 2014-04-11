@@ -1,7 +1,11 @@
 package mattmerr47.piplot.io.path;
 
-public abstract class Path {
+import java.io.Serializable;
+
+import mattmerr47.piplot.io.PositionHelper;
+
+public interface Path extends Serializable {
 	
-	public abstract PathComponent[] getComponents();
+	public abstract void draw(PositionHelper posHelper);
 
 }
