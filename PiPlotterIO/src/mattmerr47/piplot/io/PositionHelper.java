@@ -197,12 +197,12 @@ public class PositionHelper {
 	
 	public void line(Point from, Point to, double segsPerInch, double inchesPerSec) {
 		
-		if (from != null && getPenPosition().dist(from) > 0.0001) {
+		if (from != null && getPenPosition().dist(from) > 0.5) {
 			System.out.println(getPenPosition() + "!=" + from);
 			
-			//plotter.setMarking(false);
+			plotter.setMarking(false);
 			moveTo(from);
-			//plotter.setMarking(false);
+			plotter.setMarking(true);
 		}
 		
 		from = getPenPosition();

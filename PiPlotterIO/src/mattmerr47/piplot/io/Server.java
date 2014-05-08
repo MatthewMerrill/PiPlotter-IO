@@ -1,6 +1,5 @@
 package mattmerr47.piplot.io;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -16,7 +15,7 @@ import mattmerr47.piplot.io.plotter.IPenPlotter;
 
 public class Server {
 	
-	public static final String IP = "169.254.35.47";
+	public static final String IP = "192.168.42.1";
 	public static final int PORT = 470;
 
 	private ServerSocket serverSocket;
@@ -38,7 +37,7 @@ public class Server {
 
 		if (listening)
 			return;
-		
+		//
 		boolean success = startServer();
 		if (!success)
 			return;
